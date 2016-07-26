@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">StkFpma</string>
     <string name="welcome_page">Page d\'accueil</string>
+
+
+    <string-array name="left_menu">
+        <item>Accueil et Actualités</item>
+        <item>Présentation</item>
+        <item>Spirituel</item>
+        <item>Vidéos</item>
+        <item>Photos</item>
+        <item>Divers</item>
+    </string-array>
+
 </resources>
