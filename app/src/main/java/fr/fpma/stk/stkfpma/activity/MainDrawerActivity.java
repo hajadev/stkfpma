@@ -34,7 +34,8 @@ public class MainDrawerActivity extends Activity {
                 if(i==drawerItemsList.length){ // On a cliqué sur Calendrier
 
                 }
-                Intent intent = new Intent(MainDrawerActivity.this, CalendarActivity.class);
+//                Intent intent = new Intent(MainDrawerActivity.this, CalendarActivity.class);
+                Intent intent = new Intent(MainDrawerActivity.this, CalendarViewActivity_.class);
 
                 startActivity(intent);
                 currentActivity.finish();

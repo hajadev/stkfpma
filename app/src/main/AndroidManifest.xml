@@ -21,6 +21,10 @@
             android:name=".activity.CalendarActivity"
             android:label="Calendar" >
         </activity>
+        <activity
+            android:name=".activity.CalendarViewActivity_"
+            android:label="Calendar Activity" >
+        </activity>
 
     </application>
 
