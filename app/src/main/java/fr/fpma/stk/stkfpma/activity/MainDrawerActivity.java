@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,8 @@ public class MainDrawerActivity extends Activity {
     String[] drawerItemsList;
     @ViewById(R.id.my_drawer)
     ListView myDrawer;
+    @ViewById(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     Activity currentActivity;
     FragmentManager fragmentManager;
@@ -58,7 +61,7 @@ public class MainDrawerActivity extends Activity {
 //                Intent intent = new Intent(MainDrawerActivity.this, CalendarViewActivity_.class);
 //                startActivity(intent);
 //                currentActivity.finish();
-
+                drawerLayout.closeDrawer(myDrawer);
             }
         });
 
