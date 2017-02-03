@@ -24,8 +24,33 @@
             android:id="@+id/display_drawer_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/bandeau"
+            android:layout_below="@+id/bandeau"
             android:text="Cliquez ici pour afficher" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/display_drawer_txt">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <fragment
+                    android:id="@+id/welcome_fragment_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    class="fr.fpma.stk.stkfpma.fragment.WelcomeFragment_"/>
+
+                <fragment
+                    android:id="@+id/calendar_fragment_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    class="fr.fpma.stk.stkfpma.fragment.CalendarFragment_"/>
+
+            </RelativeLayout>
+
+        </ScrollView>
 
     </RelativeLayout>
 
