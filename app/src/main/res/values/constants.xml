@@ -14,9 +14,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<resources>
-    <color name="gray">#ff888888</color>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item type="id" name="player_view"/>
+
+    <string name="minVersion">minVersion</string>
+    <string name="isLaunchableActivity">isLaunchableActivity</string>
+    <string name="loggingTag">YoutubeAPIDemos</string>
+
 </resources>

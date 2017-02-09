@@ -48,6 +48,12 @@
                     android:layout_height="match_parent"
                     class="fr.fpma.stk.stkfpma.fragment.CalendarFragment_"/>
 
+                <fragment
+                    android:id="@+id/youtube_player_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    class="com.google.android.youtube.player.YouTubePlayerFragment"/>
+
             </RelativeLayout>
 
         </ScrollView>

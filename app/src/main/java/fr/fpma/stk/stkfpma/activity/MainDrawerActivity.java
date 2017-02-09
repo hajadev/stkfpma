@@ -6,10 +6,15 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -22,7 +27,8 @@ import fr.fpma.stk.stkfpma.fragment.CalendarFragment;
 import fr.fpma.stk.stkfpma.fragment.WelcomeFragment;
 
 @EActivity(R.layout.activity_main_drawer)
-public class MainDrawerActivity extends Activity {
+public class MainDrawerActivity extends YouTubeFailureRecoveryActivity {
+
     @StringArrayRes(R.array.left_menu)
     String[] drawerItemsList;
     @ViewById(R.id.my_drawer)
@@ -30,16 +36,19 @@ public class MainDrawerActivity extends Activity {
     @ViewById(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
-    Activity currentActivity;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+    private Activity currentActivity;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    private Fragment currentFragment;
 
     @FragmentById(R.id.welcome_fragment_id)
     WelcomeFragment welcomeFragment;
     @FragmentById(R.id.calendar_fragment_id)
     CalendarFragment calendarFragment;
+    @FragmentById(R.id.youtube_player_fragment)
+    YouTubePlayerFragment youTubePlayerFragment;
 
-    Fragment currentFragment;
+    private YouTubePlayer youTubePlayer;
 
     @AfterViews
     void AfterViews(){
@@ -53,6 +62,9 @@ public class MainDrawerActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i==0){
                     switchToWelcome();
+                }
+                else if(i==3){
+                    switchToYoutube();
                 }
                 else{
                     switchToCalendar();
@@ -71,9 +83,13 @@ public class MainDrawerActivity extends Activity {
 
     private void initDisplay(){
         fragmentTransaction = fragmentManager.beginTransaction();
+        youTubePlayerFragment.initialize(DEVELOPER_KEY, this);
+        this.getYouTubePlayerProvider();
         fragmentTransaction.attach(welcomeFragment);
         fragmentTransaction.attach(calendarFragment);
+        fragmentTransaction.attach(youTubePlayerFragment);
         fragmentTransaction.hide(calendarFragment);
+        fragmentTransaction.hide(youTubePlayerFragment);
         fragmentTransaction.commit();
         currentFragment = welcomeFragment;
     }
@@ -81,6 +97,7 @@ public class MainDrawerActivity extends Activity {
     private void switchToCalendar(){
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.hide(welcomeFragment);
+        fragmentTransaction.hide(youTubePlayerFragment);
         fragmentTransaction.show(calendarFragment);
         fragmentTransaction.commit();
         currentFragment = calendarFragment;
@@ -89,9 +106,37 @@ public class MainDrawerActivity extends Activity {
     private void switchToWelcome(){
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.hide(calendarFragment);
+        fragmentTransaction.hide(youTubePlayerFragment);
         fragmentTransaction.show(welcomeFragment);
         fragmentTransaction.commit();
         currentFragment = welcomeFragment;
+    }
+
+    private void switchToYoutube(){
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.hide(calendarFragment);
+        fragmentTransaction.hide(welcomeFragment);
+        fragmentTransaction.show(youTubePlayerFragment);
+        fragmentTransaction.commit();
+        currentFragment = youTubePlayerFragment;
+    }
+
+
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+                                        boolean wasRestored) {
+        if (!wasRestored) {
+            player.cueVideo("nYRkD8bRkjA");
+        }
+        youTubePlayer = player;
+        youTubePlayer.loadVideo("nYRkD8bRkjA");
+        Log.i("haja", "initialisation success!!!!!");
+    }
+
+    @Override
+    protected YouTubePlayer.Provider getYouTubePlayerProvider() {
+        return youTubePlayerFragment;
     }
 
 }
