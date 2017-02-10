@@ -130,7 +130,8 @@ public class MainDrawerActivity extends YouTubeFailureRecoveryActivity {
             player.cueVideo("nYRkD8bRkjA");
         }
         youTubePlayer = player;
-        youTubePlayer.loadVideo("nYRkD8bRkjA");
+//        youTubePlayer.loadVideo("nYRkD8bRkjA");
+        youTubePlayer.loadPlaylist("UUg2kFkj6H9Ed37NwZShts-w");
         Log.i("haja", "initialisation success!!!!!");
     }
 
